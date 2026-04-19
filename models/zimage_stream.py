@@ -55,9 +55,9 @@ pipe = ZImagePipeline.from_pretrained(
 
 # Encode text on CPU then unload
 with torch.no_grad():
-    tokens = pipe.tokenizer(prompt, return_tensors="pt", padding=True, truncation=True)
+    tokens = pipe.tokenizer(prompt, return_tensors="pt", padding="max_length", max_length=77, truncation=True)
     prompt_embeds = pipe.text_encoder(**tokens).last_hidden_state
-    neg_tokens = pipe.tokenizer(neg_prompt or "", return_tensors="pt", padding=True, truncation=True)
+    neg_tokens = pipe.tokenizer(neg_prompt or "", return_tensors="pt", padding="max_length", max_length=77, truncation=True)
     neg_embeds  = pipe.text_encoder(**neg_tokens).last_hidden_state
 pipe.text_encoder = None
 pipe.tokenizer = None
