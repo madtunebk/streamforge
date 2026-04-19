@@ -43,7 +43,13 @@ def fuse_lora(model, lora_path: str, scale: float = 1.0):
 
 
 def get_blocks(model) -> list:
-    """Auto-detect transformer block list from common attribute names."""
+    """Auto-detect transformer block list from common attribute names.
+    For Flux-style models with two block lists, combines both."""
+    # Flux has transformer_blocks + single_transformer_blocks — stream both
+    if hasattr(model, "transformer_blocks") and hasattr(model, "single_transformer_blocks"):
+        blocks = list(model.transformer_blocks) + list(model.single_transformer_blocks)
+        print(f"  {len(list(model.transformer_blocks))} transformer_blocks + {len(list(model.single_transformer_blocks))} single_transformer_blocks = {len(blocks)} total")
+        return blocks
     for attr in ("transformer_blocks", "blocks", "layers"):
         if hasattr(model, attr):
             blocks = getattr(model, attr)
