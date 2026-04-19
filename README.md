@@ -114,6 +114,16 @@ Any transformer-based diffusion model with `self.blocks`, `self.layers`, or `sel
 **VRAM is almost irrelevant** — StreamForge keeps peak VRAM at 2-4GB regardless of model size.  
 **CPU RAM is the bottleneck** — the entire model must fit in RAM (e.g., 57GB for Wan2.2 14B needs 64GB+ RAM).
 
+## Platform Support
+
+| Platform | Status | Notes |
+|----------|--------|-------|
+| **Linux** | ✅ Confirmed | Native PCIe DMA, full async transfer, tested on Ubuntu |
+| **Windows** | ⚠️ Untested | Should work but WSL2 has virtual PCIe — slower, less predictable |
+| **macOS** | ❌ Not supported | No CUDA, MPS backend incompatible with `cpu_offload` |
+
+StreamForge relies on CUDA + `accelerate.cpu_offload` for async PCIe streaming. Linux gives the best PCIe DMA performance — Windows native (not WSL2) may work but is untested.
+
 ## Architecture
 
 ```
