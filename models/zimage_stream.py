@@ -8,6 +8,7 @@ creates a universal streaming engine. 30 transformer blocks, 1.4GB VRAM peak.
 import os, sys, torch, time, random
 import safetensors.torch as st
 from diffusers import ZImagePipeline, AutoModel, FlowMatchEulerDiscreteScheduler
+from transformers import AutoTokenizer
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from engines.layer_prefetcher import setup_stream_mode
@@ -49,18 +50,17 @@ def fuse_lora(transformer, path: str, scale: float):
 pipe = ZImagePipeline.from_pretrained(
     MODEL_ID,
     transformer=None, vae=None, scheduler=None,
-    text_encoder=None, tokenizer=None,
     torch_dtype=torch.bfloat16,
 )
 
-# Encode text on CPU
-pipe.text_encoder = pipe.text_encoder or AutoModel.from_pretrained(MODEL_ID, subfolder="text_encoder", torch_dtype=torch.bfloat16)
+# Encode text on CPU then unload
 with torch.no_grad():
     tokens = pipe.tokenizer(prompt, return_tensors="pt", padding=True, truncation=True)
     prompt_embeds = pipe.text_encoder(**tokens).last_hidden_state
     neg_tokens = pipe.tokenizer(neg_prompt or "", return_tensors="pt", padding=True, truncation=True)
     neg_embeds  = pipe.text_encoder(**neg_tokens).last_hidden_state
 pipe.text_encoder = None
+pipe.tokenizer = None
 
 # Load transformer to CPU + optional LoRA fusion
 print("Loading transformer to CPU RAM...")
