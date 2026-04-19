@@ -66,14 +66,14 @@ that it never stalls — because each block takes 30-50ms to compute but only ~6
 
 ```python
 from engines.layer_prefetcher import setup_stream_mode
-from diffusers import QwenImagePipeline, AutoModel
+from diffusers import FluxPipeline, AutoModel
 import torch
 
-MODEL_ID = "Qwen/Qwen-Image"
+MODEL_ID = "black-forest-labs/FLUX.1-dev"
 DEVICE   = torch.device("cuda:0")
 
 # Load pipeline shell (no transformer)
-pipe = QwenImagePipeline.from_pretrained(MODEL_ID, transformer=None, torch_dtype=torch.bfloat16)
+pipe = FluxPipeline.from_pretrained(MODEL_ID, transformer=None, torch_dtype=torch.bfloat16)
 
 # Load transformer to CPU RAM
 transformer = AutoModel.from_pretrained(MODEL_ID, subfolder="transformer",
