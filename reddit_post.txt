@@ -1,0 +1,20 @@
+TITLE:
+I accidentally built a universal streaming engine that runs 40GB models on 3GB VRAM
+
+BODY:
+While trying to run a LoRA on a 12GB GPU without OOMing, I discovered that
+cpu_offload + async prefetch hooks create a universal streaming engine for
+any transformer model.
+
+The key insight: transformer blocks execute sequentially. You only need ONE
+block in VRAM at a time. While GPU computes block N, we DMA-transfer block
+N+1 from CPU RAM over PCIe. The GPU never waits.
+
+Results on RTX 3060 12GB:
+- Z-Image-Turbo: needs 24GB → runs at 1.4GB VRAM
+- Wan2.2 I2V 14B: needs 80GB → runs at 2-4GB VRAM
+- Qwen-Image: needs 40GB → runs at 3GB VRAM (batch of 10 @ 1080p = 8GB)
+
+No quantization. Full bfloat16. 130 lines of Python.
+
+GitHub: https://github.com/madtunebk/streamforge

@@ -17,6 +17,10 @@ The GPU never waits. The model never knows it's streaming.
 
 ## Gallery
 
+**Qwen-Image — default prompt, clean install, fresh env, RTX 3060**
+
+![Qwen-Image unicorn](examples/output/qwen_unicorn_default_prompt.png)
+
 **Qwen-Image — 1080p, 40GB model, <3GB VRAM, RTX 3060, full bfloat16**
 
 ![Qwen-Image 1080p example](examples/output/qwen_1080p_example.png)
