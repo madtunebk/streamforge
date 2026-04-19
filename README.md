@@ -15,6 +15,16 @@ The key insight: **transformer blocks execute sequentially**. You only need one 
 While the GPU computes block N, we DMA-transfer block N+1 from CPU RAM over PCIe.
 The GPU never waits. The model never knows it's streaming.
 
+## Gallery
+
+**Qwen-Image — 1080p, 40GB model, <3GB VRAM, RTX 3060, full bfloat16**
+
+![Qwen-Image 1080p example](examples/output/qwen_1080p_example.png)
+
+*Prompt: "A fierce female police officer in full tactical riot gear standing in front of explosions, cinematic, 4K, photorealistic, dramatic lighting"*
+
+---
+
 ## Results
 
 | Model | Size | Normal VRAM | StreamForge VRAM | Hardware |
