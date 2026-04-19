@@ -84,6 +84,9 @@ Any transformer-based diffusion model with `self.blocks`, `self.layers`, or `sel
 
 ## Hardware Requirements
 
+> **Minimum to run any model:** 4GB VRAM GPU + 32GB CPU RAM + PCIe Gen3  
+> **Tested on:** RTX 3060 12GB × 2, AMD Ryzen 9 9900X, 64GB DDR5
+
 | Component | Minimum | Recommended |
 |-----------|---------|-------------|
 | GPU VRAM | 4GB | 12GB+ |
@@ -91,6 +94,9 @@ Any transformer-based diffusion model with `self.blocks`, `self.layers`, or `sel
 | RAM Speed | DDR4 | DDR5 6000+ |
 | PCIe | Gen3 x8 | Gen4 x16 |
 | CPU | Any | AMD Ryzen (fast memory controller) |
+
+**VRAM is almost irrelevant** — StreamForge keeps peak VRAM at 2-4GB regardless of model size.  
+**CPU RAM is the bottleneck** — the entire model must fit in RAM (e.g., 57GB for Wan2.2 14B needs 64GB+ RAM).
 
 ## Architecture
 
