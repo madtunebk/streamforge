@@ -155,7 +155,7 @@ StreamForge/
 ## Performance
 
 Unoptimized (current):
-- ~2-3× slower than native full-VRAM inference (benchmarked vs ComfyUI on Z-Image)
+- ~2-3× slower than native full-VRAM inference
 - No pinned memory (avoids OOM on 64GB systems)
 
 Planned optimizations:
