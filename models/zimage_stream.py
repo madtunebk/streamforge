@@ -19,7 +19,7 @@ width, height, steps, cfg, imgs = 768, 768, 9, 1.0, 1
 lora_path  = None   # path to .safetensors LoRA, or None
 lora_scale = 0.75
 DEVICE     = torch.device("cuda:0")
-OUT_DIR    = os.path.join(os.path.dirname(__file__), "..", "output", "zimage")
+OUT_DIR    = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "output", "zimage"))
 os.makedirs(OUT_DIR, exist_ok=True)
 
 

@@ -18,7 +18,7 @@ wan_width, wan_height, wan_frames, wan_steps, wan_cfg = 832, 480, 17, 50, 5.0
 fps         = 16
 DEVICE      = torch.device("cuda:0")
 DEVICE2     = torch.device("cuda:1")
-OUT_DIR     = os.path.join(os.path.dirname(__file__), "..", "output", "wan")
+OUT_DIR     = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "output", "wan")
 os.makedirs(OUT_DIR, exist_ok=True)
 
 assert FIRST_FRAME and os.path.exists(FIRST_FRAME), "Set FIRST_FRAME to an input image path"

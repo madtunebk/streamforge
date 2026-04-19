@@ -15,7 +15,7 @@ prompt     = "A majestic white unicorn galloping through an enchanted forest, go
 neg_prompt = "blurry, low quality, watermark, deformed"
 width, height, steps, cfg = 768, 768, 20, 5.0
 DEVICE     = torch.device("cuda:0")
-OUT_DIR    = os.path.join(os.path.dirname(__file__), "..", "output", "qwen")
+OUT_DIR    = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "output", "qwen"))
 os.makedirs(OUT_DIR, exist_ok=True)
 
 pipe = QwenImagePipeline.from_pretrained(MODEL_ID, transformer=None, torch_dtype=torch.bfloat16)
