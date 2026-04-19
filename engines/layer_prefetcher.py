@@ -126,6 +126,7 @@ class LayerPrefetcher:
                 return args
             self._pre_hooks.append(block.register_forward_pre_hook(pre))
         self._prefetch(0)
+        self._prefetch(1)
 
     def install_post_hooks(self):
         """Call AFTER cpu_offload."""
@@ -133,6 +134,7 @@ class LayerPrefetcher:
             def post(module, args, output, idx=i):
                 self._restore_cpu(module, idx)
                 self._prefetch(idx + 1)
+                self._prefetch(idx + 2)
                 return output
             self._post_hooks.append(block.register_forward_hook(post))
 
