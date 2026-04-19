@@ -42,6 +42,7 @@ The GPU never waits. The model never knows it's streaming.
 | Z-Image-Turbo | ~11GB | 24GB (HF official) | **1.4GB** | RTX 3060 12GB |
 | Wan2.2 I2V 14B | ~57GB | 80GB (HF official) | **2-4GB** | 2× RTX 3060 12GB |
 | Qwen-Image | ~41GB | 40GB+ (HF official, text encoder offloaded) | **<3GB** (1 image) / **8GB** (batch of 10 @ 1080p) | RTX 3060 12GB |
+| FLUX.1-dev | ~24GB | 24GB (HF official) | **<4GB** | RTX 3060 12GB |
 
 **~$1200 USD hardware running models that normally require $30,000+ servers.**
 
@@ -96,7 +97,7 @@ Any transformer-based diffusion model with `self.blocks`, `self.layers`, or `sel
 - ✅ **Z-Image / Z-Image-Turbo** (Tongyi-MAI) — **the original discovery**, 30 blocks, 1.4GB VRAM
 - ✅ **Wan2.2 I2V 14B** (Wan-AI) — image-to-video, dual transformer, 2-4GB VRAM
 - ✅ **Qwen-Image** (Qwen) — image generation, text rendering, 2-4GB VRAM
-- 🔜 **Flux Dev** — image generation
+- ✅ **FLUX.1-dev** (Black Forest Labs) — image generation, 24GB → **<4GB VRAM**, 2m35s @ 1024×1024
 - 🔜 **SD3** — image generation  
 - 🔜 **CogVideoX** — video generation
 - 🔜 **HunyuanVideo** — video generation
