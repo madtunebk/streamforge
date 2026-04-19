@@ -73,9 +73,9 @@ prefetcher.remove()
 
 Any transformer-based diffusion model with `self.blocks`, `self.layers`, or `self.transformer_blocks`:
 
-- ✅ **Z-Image / Z-Image-Turbo** (Tongyi-MAI) — image generation
-- ✅ **Wan2.2 I2V 14B** (Wan-AI) — image-to-video, dual transformer
-- ✅ **Qwen-Image** (Qwen) — image generation, text rendering
+- ✅ **Z-Image / Z-Image-Turbo** (Tongyi-MAI) — **the original discovery**, 30 blocks, 1.4GB VRAM
+- ✅ **Wan2.2 I2V 14B** (Wan-AI) — image-to-video, dual transformer, 2-4GB VRAM
+- ✅ **Qwen-Image** (Qwen) — image generation, text rendering, 2-4GB VRAM
 - 🔜 **Flux Dev** — image generation
 - 🔜 **SD3** — image generation  
 - 🔜 **CogVideoX** — video generation
