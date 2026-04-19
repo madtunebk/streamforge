@@ -23,6 +23,12 @@ The GPU never waits. The model never knows it's streaming.
 
 *Prompt: "A fierce female police officer in full tactical riot gear standing in front of explosions, cinematic, 4K, photorealistic, dramatic lighting"*
 
+**Batch of 10 × 1080p — 8394MiB (8.2GB) VRAM peak, GPU at 100% compute**
+
+![Batch 10 proof](examples/output/qwen_batch10_1080p_proof.png)
+
+*GPU0: 8.2GB VRAM, 10 images × 1920×1072, 40GB model — on a single RTX 3060 12GB*
+
 ---
 
 ## Results
