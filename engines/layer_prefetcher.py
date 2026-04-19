@@ -11,7 +11,35 @@ Proven on:
 """
 
 import torch
+import safetensors.torch as st
 from accelerate import cpu_offload
+
+
+def fuse_lora(model, lora_path: str, scale: float = 1.0):
+    """
+    Fuse a LoRA into model weights on CPU before streaming.
+    Zero VRAM cost. Works with any diffusers-compatible LoRA.
+    """
+    sd = st.load_file(lora_path)
+    lora_A = {k[:-len(".lora_A.weight")]: v for k, v in sd.items() if k.endswith(".lora_A.weight")}
+    lora_B = {k[:-len(".lora_B.weight")]: v for k, v in sd.items() if k.endswith(".lora_B.weight")}
+    strip  = lambda k: k[len("diffusion_model."):] if k.startswith("diffusion_model.") else k
+    lora_A = {strip(k): v for k, v in lora_A.items()}
+    lora_B = {strip(k): v for k, v in lora_B.items()}
+    params = dict(model.named_parameters())
+    fused  = 0
+    for key in lora_A:
+        if key not in lora_B:
+            continue
+        p = params.get(f"{key}.weight")
+        if p is None:
+            continue
+        A = lora_A[key].to(dtype=p.dtype)
+        B = lora_B[key].to(dtype=p.dtype)
+        p.data += scale * (B @ A)
+        fused += 1
+    print(f"  Fused {fused} LoRA layers from {lora_path} (scale={scale})")
+    return fused
 
 
 def get_blocks(model) -> list:
