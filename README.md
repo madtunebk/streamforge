@@ -36,7 +36,7 @@ The GPU never waits. The model never knows it's streaming.
 | Model | Size | Normal VRAM | StreamForge VRAM | Hardware |
 |-------|------|-------------|------------------|----------|
 | Z-Image-Turbo | ~11GB | 24GB (HF official) | **1.4GB** | RTX 3060 12GB |
-| Wan2.2 I2V 14B | ~57GB | 50GB+ | **2-4GB** | 2× RTX 3060 12GB |
+| Wan2.2 I2V 14B | ~57GB | 80GB (HF official) | **2-4GB** | 2× RTX 3060 12GB |
 | Qwen-Image | ~41GB | 40GB+ (HF official, text encoder offloaded) | **<3GB** (1 image) / **8GB** (batch of 10 @ 1080p) | RTX 3060 12GB |
 
 **~$1200 USD hardware running models that normally require $30,000+ servers.**
